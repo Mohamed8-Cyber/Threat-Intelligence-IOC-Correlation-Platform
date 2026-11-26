@@ -1,0 +1,5 @@
+INC-2026-1022: payroll phishing and beacon (SAMPLE DATA)
+
+On 2026-10-22 the SOC saw a workstation resolve secure-payroll-verify[.]test and then beacon to hxxps://secure-payroll-verify[.]test/login/session. The same workstation later contacted 198[.]51[.]100[.]23, the address already tracked as ShadowLoader infrastructure. The lure invoice-october.pdf carried a loader with digest 4093bc89a886b705772d93f8781ba006.
+
+Phishing sender: billing@secure-payroll-verify[.]test

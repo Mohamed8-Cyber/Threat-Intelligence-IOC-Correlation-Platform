@@ -1,0 +1,20 @@
+# Passive DNS and sightings export. SAMPLE DATA: reserved .example and .test names and RFC 5737 documentation addresses.
+type,value,confidence,tags,campaign,related
+domain,update-cdn-sync.example,85,c2;malware,ShadowLoader,198.51.100.23
+ip,198.51.100.23,90,c2;botnet,ShadowLoader,
+ip,198.51.100.23,40,scanner,CoinMiner-7,
+domain,files.update-cdn-sync.example,80,c2;malware,ShadowLoader,
+url,http://files.update-cdn-sync.example/gate.php,88,c2;malware,ShadowLoader,
+sha256,daa510a56c051a163f03e5542ce2c4df427ad62cd26cdc1918c03cb15f8648da,92,malware;stealer,ShadowLoader,http://files.update-cdn-sync.example/gate.php
+domain,secure-payroll-verify.test,76,phishing,PhishKit Ledger,203.0.113.77
+ip,203.0.113.77,70,phishing;hosting-range,PhishKit Ledger,
+url,https://secure-payroll-verify.test/login/session,79,phishing,PhishKit Ledger,
+email,billing@secure-payroll-verify.test,65,phishing,PhishKit Ledger,
+cidr,203.0.113.0/24,60,hosting-range,PhishKit Ledger,
+md5,4093bc89a886b705772d93f8781ba006,68,phishing,PhishKit Ledger,https://secure-payroll-verify.test/login/session
+domain,pool-relay.miner-feed.test,62,miner;scanner,CoinMiner-7,192.0.2.88
+ip,192.0.2.88,55,miner;scanner,CoinMiner-7,
+domain,mirror.pool-relay.miner-feed.test,58,miner,CoinMiner-7,
+sha1,881a597f97726a0a37816144b7e4d89acb67a8d5,50,miner,CoinMiner-7,pool-relay.miner-feed.test
+domain,login.microsoft.com,40,phishing,,
+ip,999.1.1.1,50,c2,,

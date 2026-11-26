@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Threat intelligence: indicators and their connections</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand">Threat intelligence</div>
+    <div id="status" class="status" role="status">Connecting to the API</div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Indicators, and what they are tied to.</h1>
+      <p>Feeds, partner bundles and analyst reports land in one store. Each indicator keeps its sources, a triage score that falls with age, and the links it shares with others. A triage score ranks what to look at first. It is not a probability. The demo data is synthetic and uses reserved .example and .test names.</p>
+    </section>
+
+    <section id="figures" class="figures" aria-label="Totals"></section>
+
+    <div class="workspace">
+      <section class="ledger" aria-labelledby="ledger-title">
+        <div class="ledger-head">
+          <h2 id="ledger-title">Indicators</h2>
+          <div class="filters">
+            <input id="q" type="search" placeholder="Search a value" aria-label="Search indicators">
+            <select id="type" aria-label="Indicator type"></select>
+            <label>Minimum triage
+              <input id="min" type="range" min="0" max="100" value="0" aria-label="Minimum triage score">
+              <output id="minOut">0%</output>
+            </label>
+          </div>
+        </div>
+        <p id="count" class="small"></p>
+        <table>
+          <thead>
+            <tr><th scope="col">Indicator</th><th scope="col">Type</th><th scope="col">Triage</th><th scope="col">Sources</th><th scope="col">Severity</th></tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </section>
+
+      <aside id="dossier" class="dossier" aria-live="polite">
+        <h2>Connections</h2>
+        <p class="empty">Select an indicator to see what it is connected to.</p>
+      </aside>
+    </div>
+
+    <section class="clusters" aria-labelledby="clusters-title">
+      <h2 id="clusters-title">Campaign clusters</h2>
+      <p class="small">A cluster joins indicators through structural facts and through feed assertions that at least two sources agree on. Shared infrastructure is listed separately and is never used to merge campaigns.</p>
+      <div id="clusters" class="cluster-grid"></div>
+      <h3 class="subhead">Shared infrastructure</h3>
+      <ul id="shared" class="shared"></ul>
+    </section>
+
+    <footer>
+      <p>Export: <a href="/api/export/csv">CSV</a>, <a href="/api/export/json">JSON</a>, <a href="/api/export/stix">STIX 2.1</a>, <a href="/api/export/blocklist">blocklist</a>, <a href="/api/export/xlsx">Excel</a>, <a href="/docs">API documentation</a></p>
+    </footer>
+  </main>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

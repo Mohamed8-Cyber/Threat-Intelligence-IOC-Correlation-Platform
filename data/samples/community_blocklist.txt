@@ -1,0 +1,7 @@
+# Community blocklist (SAMPLE DATA). One indicator per line.
+198.51.100.23
+192.0.2.88
+evil-mirror-7.example
+198.51.100.250
+pool-relay.miner-feed.test
+999.999.1.1

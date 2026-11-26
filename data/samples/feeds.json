@@ -1,0 +1,22 @@
+{
+  "feeds": [
+    {
+      "name": "passive-dns-sample",
+      "format": "csv",
+      "path": "pdns_sample.csv",
+      "reliability": 0.8
+    },
+    {
+      "name": "partner-stix-sample",
+      "format": "stix",
+      "path": "partner_bundle.json",
+      "reliability": 0.9
+    },
+    {
+      "name": "community-blocklist",
+      "format": "text",
+      "path": "community_blocklist.txt",
+      "reliability": 0.5
+    }
+  ]
+}

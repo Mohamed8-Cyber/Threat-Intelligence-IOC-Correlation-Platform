@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM Council: Threat intelligence platform review</title>
+<style>
+  :root {
+    --ink: #1f2933;
+    --muted: #616e7c;
+    --line: #e4e7eb;
+    --soft: #f7f8fa;
+    --agree: #2f6f4f;
+    --clash: #9a4f1e;
+    --caught: #3b5f8a;
+    --build: #5a4a8a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #ffffff;
+    color: var(--ink);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
+  header h1 { font-size: 28px; margin: 0 0 6px; font-weight: 650; }
+  header .question { color: var(--muted); margin: 0 0 28px; font-size: 15px; }
+  .verdict {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--ink);
+    background: var(--soft);
+    padding: 24px 28px;
+    border-radius: 6px;
+    margin-bottom: 36px;
+  }
+  .verdict h2 { font-size: 13px; color: var(--muted); font-weight: 600; margin: 0 0 4px; }
+  .verdict .one { font-size: 19px; font-weight: 600; margin: 0 0 12px; }
+  .verdict p { margin: 0 0 10px; }
+  .verdict ol { margin: 8px 0 0; padding-left: 22px; }
+  .verdict li { margin-bottom: 4px; }
+  h2.section { font-size: 18px; margin: 36px 0 14px; font-weight: 650; }
+  .positions { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+  .position {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+    background: #fff;
+  }
+  .position .tag { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+  .position .name { font-weight: 600; margin-bottom: 4px; }
+  .position .stance { font-size: 14px; color: var(--muted); margin: 0; }
+  .tag.build { color: var(--build); }
+  .tag.agree { color: var(--agree); }
+  .tag.clash { color: var(--clash); }
+  .tag.caught { color: var(--caught); }
+  details {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background: #fff;
+  }
+  details summary {
+    cursor: pointer;
+    padding: 13px 16px;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before {
+    content: "";
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent, var(--muted));
+    flex: none;
+  }
+  details[open] summary { border-bottom: 1px solid var(--line); }
+  details .body { padding: 14px 18px 16px 18px; }
+  details .body p { margin: 0 0 12px; }
+  details .body p:last-child { margin-bottom: 0; }
+  .review-item { margin-bottom: 14px; }
+  .review-item h3 { font-size: 15px; margin: 0 0 6px; }
+  .review-item ol { margin: 0; padding-left: 20px; }
+  .review-item li { margin-bottom: 4px; }
+  footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+  }
+  footer p { margin: 0 0 4px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>LLM Council</h1>
+    <p class="question">Question: Before presenting the Threat intelligence aggregation and IOC correlation Platform as finished, is the architecture sound for an analyst-facing MVP, and which risks must be fixed or cut first?</p>
+  </header>
+
+  <section class="verdict" aria-labelledby="verdict-title">
+    <h2 id="verdict-title">The chairman's verdict</h2>
+    <p class="one">Keep the architecture for an MVP, but present it as an MVP with measured limits, not a finished platform. First, make clustering use only evidence that can bear weight.</p>
+    <p>Co-reporting should suggest a relationship, not merge two campaigns. Related indicators should not inherit full credit. Links need a source and a timestamp. The score must be defined as a triage rank.</p>
+    <p><strong>The one thing to do first:</strong> write one failing test in which a single IP seen in two unrelated campaigns must not merge them into one cluster. Fix the clustering until it passes, then run the demo.</p>
+    <p><strong>Before the deck is written:</strong></p>
+    <ol>
+      <li>Clusters use only structural links and feed links that a second source corroborates.</li>
+      <li>Related indicators receive no sighting credit of their own, or a reduced one.</li>
+      <li>Links store the source name and a timestamp, and cluster eligibility decays with age.</li>
+      <li>The score is called a triage rank, defined in one sentence.</li>
+      <li>Oversized campaigns appear in the report with a count and a warning.</li>
+      <li>Write endpoints require an API key.</li>
+      <li>The deck states that all data is synthetic, using reserved .example and .test names.</li>
+      <li>The STIX relationship export is removed from this release. The indicator export remains.</li>
+    </ol>
+  </section>
+
+  <h2 class="section">Where the advisors stand</h2>
+  <div class="positions">
+    <div class="position" style="--accent:#5a4a8a">
+      <div class="tag build">Redefine the model</div>
+      <div class="name">The First Principles Thinker</div>
+      <p class="stance">Three kinds of evidence are stored as one edge type. Separate them before anything else.</p>
+    </div>
+    <div class="position" style="--accent:#9a4f1e">
+      <div class="tag clash">Correctness first</div>
+      <div class="name">The Contrarian</div>
+      <p class="stance">Shared IPs, transitive clusters and silent caps produce false links that analysts could act on.</p>
+    </div>
+    <div class="position" style="--accent:#2f6f4f">
+      <div class="tag agree">Prove it runs</div>
+      <div class="name">The Executor</div>
+      <p class="stance">Nothing has been executed yet. Write the tests, run the demo, then cut the risky parts.</p>
+    </div>
+    <div class="position" style="--accent:#3b5f8a">
+      <div class="tag caught">Build on the ledger</div>
+      <div class="name">The Expansionist</div>
+      <p class="stance">Provenance and timestamps on links turn the platform into an evidence ledger worth more than a list.</p>
+    </div>
+    <div class="position" style="--accent:#616e7c">
+      <div class="tag caught">Clarify for readers</div>
+      <div class="name">The Outsider</div>
+      <p class="stance">A percentage reads as a probability. Define the score and make suppression visible.</p>
+    </div>
+  </div>
+
+  <h2 class="section">Advisor responses</h2>
+
+  <details style="--accent:#9a4f1e">
+    <summary>The Contrarian</summary>
+    <div class="body">
+      <p>The architecture has failures that a presentation would expose. Related indicators receive full sighting credit, so a shared CDN or shared-hosting address inherits a score it never earned. Clustering is transitive, so one shared IP can merge two unrelated campaigns, and co-report links carry exactly 0.5, which clears the threshold by default. The cap on oversized campaigns is silent.</p>
+      <p>The API has no authentication, so anyone who can reach the port can change the scores analysts act on. Noisy-OR assumes independent sources, but partner feeds that republish the same upstream data double count. Do not present this as finished until these have tests that fail on the current code.</p>
+    </div>
+  </details>
+
+  <details style="--accent:#5a4a8a">
+    <summary>The First Principles Thinker</summary>
+    <div class="body">
+      <p>Start from the analyst's real question: if I block or hunt this indicator, what else should I block, and how sure am I? The design answers the second with one number and the first with one graph. The root problem is that three claims (an observed DNS resolution, a source's assertion, and a hint from a shared report) are stored as one edge type with one weight.</p>
+      <p>Rebuild around the kind of evidence. Structural links may form clusters. Feed links may form clusters only with corroboration. Co-reporting is a suggestion. Define the score as a triage rank, a probability or a severity, and write that definition into the product. Then decide whether the product is a graph database or a triage tool.</p>
+    </div>
+  </details>
+
+  <details style="--accent:#2f6f4f">
+    <summary>The Executor</summary>
+    <div class="body">
+      <p>Nothing has been executed, so every claim in the deck is still a claim. Build the package and run the tests, including a test that a shared IP must not merge campaigns and a test that a repeated source must not raise the score. Run the demo once on a fresh database and copy the measured numbers into the deck.</p>
+      <p>Cut the STIX relationship export, because it is the part most likely to be rejected by a real consumer. Keep the indicator export and the xlsx export. Keep the dashboard to one table and one graph. Refreshing derived links on every ingest is acceptable at MVP scale, if the limit is stated and measured.</p>
+    </div>
+  </details>
+
+  <details style="--accent:#3b5f8a">
+    <summary>The Expansionist</summary>
+    <div class="body">
+      <p>If every link carries provenance, the platform becomes an evidence ledger. An analyst can see why two indicators are connected, STIX relationships carry real meaning, and a corroborated link can be shared with a sector group. Decay also allows blocklists with time-to-live values, which most flat blocklists lack.</p>
+      <p>Do not expand scope before the core works, but add a source column to the links table now. Adding it later means migrating every stored link.</p>
+    </div>
+  </details>
+
+  <details style="--accent:#616e7c">
+    <summary>The Outsider</summary>
+    <div class="body">
+      <p>The project uses four words for related ideas: IOC, indicator, observation and sighting. Define each once. The score is called confidence in the code and score on the dashboard, and a percentage invites reading it as the chance of being malicious. Noisy-OR needs one plain sentence on the slide.</p>
+      <p>Suppression is silent: login.microsoft.com disappears, and an analyst searching for it will assume it was never seen. State on the slide that the demo data is fictional. Show decay as one chart of a score falling over a month.</p>
+    </div>
+  </details>
+
+  <h2 class="section">Peer review highlights</h2>
+  <details>
+    <summary>Five anonymized reviews</summary>
+    <div class="body">
+      <div class="review-item">
+        <h3>Review 1</h3>
+        <ol>
+          <li>Strongest: Response D, for naming checkable failure mechanisms.</li>
+          <li>Blind spot: no repair order or definition of done in D. B supplies both.</li>
+          <li>Missed by all: no measurement of cluster precision against labelled campaigns.</li>
+        </ol>
+      </div>
+      <div class="review-item">
+        <h3>Review 2</h3>
+        <ol>
+          <li>Strongest: Response A, for identifying the central mistake.</li>
+          <li>Blind spot: A gives no schema an implementer could start from.</li>
+          <li>Missed by all: links have no timestamp, so decay never reaches clustering.</li>
+        </ol>
+      </div>
+      <div class="review-item">
+        <h3>Review 3</h3>
+        <ol>
+          <li>Strongest: Response B, for an executable order.</li>
+          <li>Blind spot: cutting STIX must also change any slide that claims STIX support.</li>
+          <li>Missed by all: the 30-day half-life and 0.5 threshold are unvalidated constants.</li>
+        </ol>
+      </div>
+      <div class="review-item">
+        <h3>Review 4</h3>
+        <ol>
+          <li>Strongest: Response E, for the missing source column.</li>
+          <li>Blind spot: E ignores licence and traffic-light restrictions on the feeds.</li>
+          <li>Missed by all: no rule for conflicting evidence between feeds.</li>
+        </ol>
+      </div>
+      <div class="review-item">
+        <h3>Review 5</h3>
+        <ol>
+          <li>Strongest: Response C, for the likely misreading of the score as a probability.</li>
+          <li>Blind spot: C addresses wording, not correctness.</li>
+          <li>Missed by all: the unauthenticated write API was not ranked against the correlation defects.</li>
+        </ol>
+      </div>
+    </div>
+  </details>
+
+  <footer>
+    <p>Council: Default (LLM Council)</p>
+    <p>Convened 2026-11-20 08:38 UTC</p>
+    <p>Question: Is the Threat intelligence aggregation and IOC correlation Platform architecture sound for an analyst-facing MVP, and what should be fixed or cut first?</p>
+  </footer>
+</main>
+</body>
+</html>

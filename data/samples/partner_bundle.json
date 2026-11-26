@@ -1,0 +1,130 @@
+{
+  "type": "bundle",
+  "id": "bundle--3f9a6c1e-0d2b-4c7e-9a11-5b8d2e4f6a70",
+  "objects": [
+    {
+      "type": "report",
+      "spec_version": "2.1",
+      "id": "report--0b7e1c2d-4a5f-4e6b-8c9d-1a2b3c4d5e60",
+      "created": "2026-11-18T10:00:00.000Z",
+      "modified": "2026-11-18T10:00:00.000Z",
+      "published": "2026-11-18T10:00:00.000Z",
+      "name": "ShadowLoader",
+      "report_types": ["campaign"],
+      "object_refs": [
+        "indicator--a1b2c3d4-0001-4000-8000-000000000001",
+        "indicator--a1b2c3d4-0001-4000-8000-000000000002"
+      ]
+    },
+    {
+      "type": "report",
+      "spec_version": "2.1",
+      "id": "report--0b7e1c2d-4a5f-4e6b-8c9d-1a2b3c4d5e61",
+      "created": "2026-11-18T10:00:00.000Z",
+      "modified": "2026-11-18T10:00:00.000Z",
+      "published": "2026-11-18T10:00:00.000Z",
+      "name": "PhishKit Ledger",
+      "report_types": ["campaign"],
+      "object_refs": [
+        "indicator--a1b2c3d4-0001-4000-8000-000000000003"
+      ]
+    },
+    {
+      "type": "report",
+      "spec_version": "2.1",
+      "id": "report--0b7e1c2d-4a5f-4e6b-8c9d-1a2b3c4d5e62",
+      "created": "2026-11-18T10:00:00.000Z",
+      "modified": "2026-11-18T10:00:00.000Z",
+      "published": "2026-11-18T10:00:00.000Z",
+      "name": "CoinMiner-7",
+      "report_types": ["campaign"],
+      "object_refs": [
+        "indicator--a1b2c3d4-0001-4000-8000-000000000004"
+      ]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--a1b2c3d4-0001-4000-8000-000000000001",
+      "created": "2026-11-18T10:00:00.000Z",
+      "modified": "2026-11-18T10:00:00.000Z",
+      "name": "ShadowLoader C2 pair",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[domain-name:value = 'update-cdn-sync.example' OR ipv4-addr:value = '198.51.100.23']",
+      "pattern_type": "stix",
+      "valid_from": "2026-11-18T00:00:00Z",
+      "confidence": 95,
+      "labels": ["c2", "botnet"]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--a1b2c3d4-0001-4000-8000-000000000002",
+      "created": "2026-11-18T10:00:00.000Z",
+      "modified": "2026-11-18T10:00:00.000Z",
+      "name": "ShadowLoader payload and gate",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[file:hashes.'SHA-256' = 'daa510a56c051a163f03e5542ce2c4df427ad62cd26cdc1918c03cb15f8648da' OR url:value = 'http://files.update-cdn-sync.example/gate.php']",
+      "pattern_type": "stix",
+      "valid_from": "2026-11-18T00:00:00Z",
+      "confidence": 90,
+      "labels": ["malware", "stealer"]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--a1b2c3d4-0001-4000-8000-000000000003",
+      "created": "2026-11-18T10:00:00.000Z",
+      "modified": "2026-11-18T10:00:00.000Z",
+      "name": "Payroll phishing host",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[domain-name:value = 'secure-payroll-verify.test' OR ipv4-addr:value = '203.0.113.77']",
+      "pattern_type": "stix",
+      "valid_from": "2026-11-18T00:00:00Z",
+      "confidence": 80,
+      "labels": ["phishing"]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--a1b2c3d4-0001-4000-8000-000000000004",
+      "created": "2026-11-18T10:00:00.000Z",
+      "modified": "2026-11-18T10:00:00.000Z",
+      "name": "Mining pool relay",
+      "indicator_types": ["anomalous-activity"],
+      "pattern": "[domain-name:value = 'pool-relay.miner-feed.test' OR ipv4-addr:value = '192.0.2.88']",
+      "pattern_type": "stix",
+      "valid_from": "2026-11-18T00:00:00Z",
+      "confidence": 70,
+      "labels": ["miner"]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--a1b2c3d4-0001-4000-8000-000000000005",
+      "created": "2026-11-18T10:00:00.000Z",
+      "modified": "2026-11-18T10:00:00.000Z",
+      "name": "Hosting range used by payroll phishing",
+      "indicator_types": ["anomalous-activity"],
+      "pattern": "[ipv4-addr:value ISSUBSET '203.0.113.0/24']",
+      "pattern_type": "stix",
+      "valid_from": "2026-11-18T00:00:00Z",
+      "confidence": 60,
+      "labels": ["hosting-range"]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--a1b2c3d4-0001-4000-8000-000000000006",
+      "created": "2026-11-18T10:00:00.000Z",
+      "modified": "2026-11-18T10:00:00.000Z",
+      "name": "Unsupported object type",
+      "indicator_types": ["malicious-activity"],
+      "pattern": "[process:name = 'svchost-update.exe']",
+      "pattern_type": "stix",
+      "valid_from": "2026-11-18T00:00:00Z",
+      "confidence": 40,
+      "labels": ["malware"]
+    }
+  ]
+}
